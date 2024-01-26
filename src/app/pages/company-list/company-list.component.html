@@ -1,0 +1,6 @@
+<p>company-list works!</p>
+<div>
+  <app-company-sort></app-company-sort>
+  <!-- Ваш список компаний с учетом выбранной сортировки -->
+  <app-company-item *ngFor="let comp of companies$ | async" [company]="comp"></app-company-item>
+</div>
