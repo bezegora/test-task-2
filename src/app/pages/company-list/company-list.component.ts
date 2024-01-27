@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CompanyItemComponent } from '../../components/company-item/company-item.component';
 import { CommonModule } from '@angular/common';
 import { CompanyModel } from '../../models/company.model';
 import { CompanyService } from '../../services/company-service.service';
-import { Observable, fromEvent, map, tap, throttleTime } from 'rxjs';
+import { Observable, Subscription, fromEvent, map, tap, throttleTime } from 'rxjs';
 import { CompanySortComponent } from '../../components/company-sort/company-sort.component';
+import { CompanyFilterComponent } from '../../components/company-filter/company-filter.component';
 
 @Component({
   selector: 'app-company-list',
@@ -12,13 +13,14 @@ import { CompanySortComponent } from '../../components/company-sort/company-sort
   imports: [
     CompanyItemComponent,
     CommonModule,
-    CompanySortComponent
+    CompanySortComponent,
+    CompanyFilterComponent
   ],
   templateUrl: './company-list.component.html',
   styleUrl: './company-list.component.scss',
   providers: []
 })
-export class CompanyListComponent implements OnInit {
+export class CompanyListComponent implements OnInit, OnDestroy {
 
   onSortChanged($sortType: string) {
 
@@ -26,24 +28,21 @@ export class CompanyListComponent implements OnInit {
 
   public companies$!: Observable<CompanyModel[]>;
   public sortedCompanies$!: Observable<CompanyModel[]>;
+  private sub!: Subscription;
 
   constructor(
     private _compService: CompanyService
   ) { }
 
-  ngOnInit(): void {
-    this.companies$ = this._compService.getObservableCompanies();
-    this._compService.sort$.subscribe((sortOrder: string) => {
-      this.sortCompanies(sortOrder);
-    })
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
-  sortCompanies(sortOrder: string) {
-    this.companies$ = this.companies$.pipe(
-      tap(result => {
-        result.sort((a, b) => a.business_name.localeCompare(b.business_name))
-      })
-    )
+  ngOnInit(): void {
+    this.companies$ = this._compService.getObservableCompanies();
+    this.sub = this._compService.sort$.subscribe((sortOrder: string) => {
+      this.companies$ = this._compService.sortCompanies(sortOrder);
+    })
   }
 
 }

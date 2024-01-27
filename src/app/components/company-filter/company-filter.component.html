@@ -1,0 +1,25 @@
+<form [formGroup]="filterForm" (ngSubmit)="applyFilter()">
+  <div>
+    <label for="nameFilter">Поиск по названию:</label>
+    <input type="text" id="nameFilter" formControlName="name">
+  </div>
+  <div>
+    <label for="typeFilter">Фильтр по типу:</label>
+    <select id="typeFilter" formControlName="type">
+      <option value="">Все типы</option>
+      <option value="Type1">Type1</option>
+      <option value="Type2">Type2</option>
+      <!-- Добавьте остальные типы компаний -->
+    </select>
+  </div>
+  <div>
+    <label for="IndustryFilter">Фильтр по виду деятельности:</label>
+    <select id="IndustryFilter" formControlName="Industry">
+      <option value="">Все виды деятельности</option>
+      <option value="Industry1">Industry1</option>
+      <option value="Industry2">Industry2</option>
+      <!-- Добавьте остальные виды деятельности -->
+    </select>
+  </div>
+  <button type="submit">Применить фильтр</button>
+</form>

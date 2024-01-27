@@ -1,0 +1,47 @@
+.company {
+  background-color: antiquewhite;
+  width: fit-content ;
+  height: fit-content ;
+  text-align: center;
+  margin: 10px;
+  padding: 5px;
+  border: 5px solid gray;
+  font-size: x-large;
+  margin: 0;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.info {
+  display: flex;
+  justify-content: space-around;
+}
+
+img {
+  height: 30vh;
+}
+
+.company {
+  max-height: 80vh;
+}
+
+button {
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 50px;
+  outline: none;
+  background: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.2em;
+  background: gray;
+  color: #fff;
+  border: #fff;
+}
+
+.text {
+  width: fit-content;
+  margin: 0;
+}

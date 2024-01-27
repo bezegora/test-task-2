@@ -20,4 +20,5 @@ export class CompanySortComponent {
   onSortChange() {
     this._companySortService.setSort(this.selectedSort);
   }
+
 }
