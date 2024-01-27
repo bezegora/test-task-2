@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { CompanyService } from '../../services/company-service.service';
 
@@ -10,7 +10,8 @@ import { CompanyService } from '../../services/company-service.service';
   styleUrl: './company-sort.component.scss'
 })
 export class CompanySortComponent {
-
+  @Output()
+  sortChanged: EventEmitter<string> = new EventEmitter<string>();
   selectedSort: string = '';
 
   constructor(
@@ -18,7 +19,7 @@ export class CompanySortComponent {
   ) {}
 
   onSortChange() {
-    this._companySortService.setSort(this.selectedSort);
+    this.sortChanged.emit(this.selectedSort);
   }
 
 }

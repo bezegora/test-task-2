@@ -1,5 +1,5 @@
 <button (click)="onBack()">&leftarrow; back</button>
-<div class="company">
+<div class="company" *ngIf="company !== null">
   <img src="{{company.logo}}" alt="logo" />
   <div class="info">
     <div class="text">

@@ -1,9 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CompanyItemComponent } from '../../components/company-item/company-item.component';
 import { CommonModule } from '@angular/common';
-import { CompanyModel } from '../../models/company.model';
 import { CompanyService } from '../../services/company-service.service';
-import { Observable, Subscription, fromEvent, map, tap, throttleTime } from 'rxjs';
 import { CompanySortComponent } from '../../components/company-sort/company-sort.component';
 import { CompanyFilterComponent } from '../../components/company-filter/company-filter.component';
 
@@ -20,29 +18,20 @@ import { CompanyFilterComponent } from '../../components/company-filter/company-
   styleUrl: './company-list.component.scss',
   providers: []
 })
-export class CompanyListComponent implements OnInit, OnDestroy {
+export class CompanyListComponent {
 
-  onSortChanged($sortType: string) {
-
+  onFilterChanged(filters: { name: string, type: string, industry: string }) {
+    this._compService.filterCompanies(filters);
   }
 
-  public companies$!: Observable<CompanyModel[]>;
-  public sortedCompanies$!: Observable<CompanyModel[]>;
-  private sub!: Subscription;
+  onSortChanged(sortType: string) {
+    this._compService.sortCompanies(sortType);
+  }
+
+  public companyList$ = this._compService.filteredCompaniesSubj;
 
   constructor(
     private _compService: CompanyService
   ) { }
-
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
-
-  ngOnInit(): void {
-    this.companies$ = this._compService.getObservableCompanies();
-    this.sub = this._compService.sort$.subscribe((sortOrder: string) => {
-      this.companies$ = this._compService.sortCompanies(sortOrder);
-    })
-  }
 
 }
