@@ -1,7 +1,7 @@
 .company {
   background-color: antiquewhite;
-  width: fit-content ;
-  height: fit-content ;
+  width: fit-content;
+  height: fit-content;
   text-align: center;
   margin: 10px;
   padding: 5px;
@@ -26,22 +26,28 @@ img {
   max-height: 80vh;
 }
 
-button {
-  top: 0;
-  left: 0;
-  width: 100px;
-  height: 50px;
-  outline: none;
-  background: none;
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 1.2em;
-  background: gray;
-  color: #fff;
-  border: #fff;
-}
-
-.text {
-  width: fit-content;
-  margin: 0;
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  button {
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 50px;
+    outline: none;
+    background: none;
+    padding: 10px;
+    font-size: 1.2em;
+    background: gray;
+    color: #fff;
+    border: #fff;
+    cursor: pointer;
+    &:hover {
+      background: rgb(100, 100, 100);
+    }
+  }
 }

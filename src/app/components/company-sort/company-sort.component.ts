@@ -12,7 +12,7 @@ import { CompanyService } from '../../services/company-service.service';
 export class CompanySortComponent {
   @Output()
   sortChanged: EventEmitter<string> = new EventEmitter<string>();
-  selectedSort: string = '';
+  selectedSort: string = this._companySortService.sortType;
 
   constructor(
     private _companySortService: CompanyService

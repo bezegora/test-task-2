@@ -1,13 +1,9 @@
-<div (click)="onCompanyClick()" class="company">
-  <!-- <img src="{{ company.logo }}" alt="logo" />
-  <h3>{{ company.business_name }}</h3>
-  <p>{{ company.industry }}</p>
-  <p>{{ company.type }}</p> -->
+<div (click)="onCompanyClick()" class="company-item">
   <div class="logo">
     <img src="{{company.logo}}" alt="logo">
   </div>
   <div class="info">
-    <h3>{{company.suffix}} "{{company.business_name}}"</h3>
+    <h2>{{company.suffix}} "{{company.business_name}}"</h2>
     <p>{{company.industry}}</p>
     <p>{{company.type}}</p>
   </div>

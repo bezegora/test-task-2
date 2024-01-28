@@ -31,11 +31,7 @@ export class CompanyFilterComponent implements OnInit {
         this.types = new Set<string>(comps?.map(c => c.type));
         this.industries = new Set<string>(comps?.map(c => c.industry));
       });
-    this.filterForm = this._fb.group({
-      name: [''],
-      type: ['All'],
-      industry: ['All'],
-    });
+    this.filterForm = this._fb.group(this._compService.filterType);
     this.filterForm.valueChanges.subscribe(
       (values: { name: string, type: string, industry: string }) => {
         this.filterChanged.emit(values);

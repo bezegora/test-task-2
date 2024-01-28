@@ -1,22 +1,25 @@
-<form [formGroup]="filterForm" >
-  <div>
+<form [formGroup]="filterForm" class="filter">
+  <div class="control">
     <label for="nameFilter">Поиск по названию:</label>
+    <br />
     <input type="text" id="nameFilter" formControlName="name" />
   </div>
-  <div>
+  <div class="control">
     <label for="typeFilter">Фильтр по типу:</label>
+    <br />
     <select id="typeFilter" formControlName="type">
       <option value="All">Все</option>
-      <option *ngFor="let type of types" value="{{type}}">{{ type }}</option>
-      <!-- Добавьте остальные типы компаний -->
+      <option *ngFor="let type of types" value="{{ type }}">{{ type }}</option>
     </select>
   </div>
-  <div>
+  <div class="control">
     <label for="industryFilter">Фильтр по виду деятельности:</label>
+    <br />
     <select id="industryFilter" formControlName="industry">
       <option value="All">Все</option>
-      <option *ngFor="let industry of industries" value="{{industry}}">{{industry}}</option>
-      <!-- Добавьте остальные виды деятельности -->
+      <option *ngFor="let industry of industries" value="{{ industry }}">
+        {{ industry }}
+      </option>
     </select>
   </div>
 </form>

@@ -23,7 +23,8 @@ export class CompanyDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this._route.params.subscribe((p: Params) => {
-      this.company = this._compService.getCompanyById(+p['id'])
+      this.company = this._compService.getCompanyById(+p['id']);
+      if (!this.company) this.onBack();
     });
   }
 

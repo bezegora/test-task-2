@@ -1,13 +1,13 @@
-<button (click)="onBack()">&leftarrow; back</button>
+<div class="nav-bar">
+  <button (click)="onBack()">Список компаний</button>
+</div>
 <div class="company" *ngIf="company !== null">
-  <img src="{{company.logo}}" alt="logo" />
-  <div class="info">
-    <div class="text">
-      <h1>{{company.suffix}} "{{company.business_name}}"</h1>
-      <p>Вид деятельности: {{company.industry}}</p>
-      <p>Слоган: {{company.catch_phrase}}</p>
-      <p>Номер телефона: {{company.phone_number}}</p>
-      <p>Адрес: {{company.full_address}}</p>
-    </div>
+  <img src="{{ company.logo }}" alt="logo" />
+  <div class="text">
+    <h1>{{ company.suffix }} "{{ company.business_name }}"</h1>
+    <p>Вид деятельности: {{ company.industry }}</p>
+    <p>Слоган: {{ company.catch_phrase }}</p>
+    <p>Номер телефона: {{ company.phone_number }}</p>
+    <p>Адрес: {{ company.full_address }}</p>
   </div>
 </div>

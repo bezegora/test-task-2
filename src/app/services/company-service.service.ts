@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CompanyModel } from '../models/company.model';
 import { BehaviorSubject, Subject, first, map, of, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +10,35 @@ import { BehaviorSubject, Subject, first, map, of, tap } from 'rxjs';
 export class CompanyService {
 
   private _API = 'https://random-data-api.com/api/company/random_company';
-  public companyListSubj = new BehaviorSubject<CompanyModel[] | null>([]);
+
+  private _sortType: string = '';
+  private _filtType: { name: string, type: string, industry: string } = {
+    name: '',
+    type: 'All',
+    industry: 'All'
+  }
+
+  public get sortType() : string {
+    return this._sortType;
+  }
+
+
+  public get filterType() : { name: string, type: string, industry: string } {
+    return this._filtType;
+  }
+
+
+
   public filteredCompaniesSubj = new BehaviorSubject<CompanyModel[] | null>(null);
   public filteredCompanyList$ = this.filteredCompaniesSubj.asObservable();
+
+  public companyListSubj = new BehaviorSubject<CompanyModel[] | null>([]);
   public companyList$ = this.companyListSubj.asObservable();
 
   public sortCompanies(sortOrder: string) {
     let comps = this.filteredCompaniesSubj.value;
-    switch (sortOrder) {
+    this._sortType = sortOrder;
+    switch (this._sortType) {
       case 'name':
         comps?.sort((a: CompanyModel, b: CompanyModel) => (a.suffix + a.business_name).localeCompare(b.suffix + b.business_name));
         break;
@@ -27,11 +49,12 @@ export class CompanyService {
         comps?.sort((a: CompanyModel, b: CompanyModel) => (a.industry).localeCompare(b.industry));
         break;
     }
-    this.companyListSubj.next(comps);
+    this.filteredCompaniesSubj.next(comps);
   }
 
   public filterCompanies(filters: { name: string, type: string, industry: string }) {
     let comps = this.companyListSubj.value;
+    this._filtType = filters;
     if (comps === null) {
       return;
     }
@@ -40,8 +63,8 @@ export class CompanyService {
         && (value.industry === filters.industry || filters.industry === 'All')
         && ((value.suffix + " \"" + value.business_name + "\" ").toLowerCase().includes(filters.name.toLowerCase()) || filters.name === '');
     });
-
     this.filteredCompaniesSubj.next(test);
+    this.sortCompanies(this._sortType);
   }
 
   public getCompanyById(id: number): CompanyModel | null {
@@ -53,7 +76,7 @@ export class CompanyService {
   }
 
   constructor(
-    private _httpClient: HttpClient,
+    private _httpClient: HttpClient
   ) {
     this.filteredCompanyList$.pipe(
       first())

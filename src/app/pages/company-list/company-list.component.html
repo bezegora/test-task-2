@@ -1,11 +1,10 @@
 <div class="layout">
   <h1>Companies</h1>
   <div class="user-controls">
-    <app-company-sort (sortChanged)="onSortChanged($event)"></app-company-sort>
-    <app-company-filter (filterChanged)="onFilterChanged($event)"></app-company-filter>
+    <app-company-sort (sortChanged)="onSortChanged($event)" class="sort"></app-company-sort>
+    <app-company-filter (filterChanged)="onFilterChanged($event)" class="filter"></app-company-filter>
   </div>
   <div class="container">
-    <!-- Ваш список компаний с учетом выбранной сортировки -->
     <app-company-item *ngFor="let comp of companyList$ | async" [company]="comp"></app-company-item>
   </div>
 </div>
