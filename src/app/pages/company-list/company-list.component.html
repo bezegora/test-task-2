@@ -1,10 +1,16 @@
 <div class="layout">
   <h1>Companies</h1>
   <div class="user-controls">
-    <app-company-sort (sortChanged)="onSortChanged($event)" class="sort"></app-company-sort>
-    <app-company-filter (filterChanged)="onFilterChanged($event)" class="filter"></app-company-filter>
+    <app-company-sort (sortChanged)="onSortChanged($event)" class="sort" />
+    <app-company-filter
+      (filterChanged)="onFilterChanged($event)"
+      class="filter"
+    />
   </div>
   <div class="container">
-    <app-company-item *ngFor="let comp of companyList$ | async" [company]="comp"></app-company-item>
+    <app-company-item
+      *ngFor="let comp of companyList$ | async"
+      [company]="comp"
+    />
   </div>
 </div>

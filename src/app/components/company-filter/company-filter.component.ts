@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CompanyService } from '../../services/company-service.service';
+import { FilterType } from '../../types/filter.type';
 
 @Component({
   selector: 'app-company-filter',
@@ -12,28 +13,28 @@ import { CompanyService } from '../../services/company-service.service';
 })
 export class CompanyFilterComponent implements OnInit {
 
+  private _compService = inject(CompanyService);
   @Output()
-  filterChanged: EventEmitter<any> = new EventEmitter<any>();
+  public filterChanged: EventEmitter<any> = new EventEmitter<any>();
 
-  filterForm!: FormGroup;
+  public filterForm!: FormGroup;
 
-  types!: Set<string>;
-  industries!: Set<string>;
+  public types!: Set<string>;
+  public industries!: Set<string>;
+  private _fb = inject(FormBuilder);
 
-  constructor(
-    private _fb: FormBuilder,
-    private _compService: CompanyService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
     this._compService.companyList$.subscribe(
       comps => {
         this.types = new Set<string>(comps?.map(c => c.type));
         this.industries = new Set<string>(comps?.map(c => c.industry));
-      });
+      }
+    );
     this.filterForm = this._fb.group(this._compService.filterType);
     this.filterForm.valueChanges.subscribe(
-      (values: { name: string, type: string, industry: string }) => {
+      (values: FilterType) => {
         this.filterChanged.emit(values);
       }
     );

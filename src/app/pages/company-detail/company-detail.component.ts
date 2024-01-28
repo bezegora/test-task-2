@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { CompanyModel } from '../../models/company.model';
 import { CompanyService } from '../../services/company-service.service';
@@ -13,13 +13,12 @@ import { CommonModule } from '@angular/common';
 })
 export class CompanyDetailComponent implements OnInit {
 
+  private _compService = inject(CompanyService);
+  private _route = inject(ActivatedRoute);
+  private _router = inject(Router);
   public company: CompanyModel | null = null;
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _router: Router,
-    private _compService: CompanyService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
     this._route.params.subscribe((p: Params) => {
@@ -28,7 +27,7 @@ export class CompanyDetailComponent implements OnInit {
     });
   }
 
-  onBack() {
+  public onBack(): void {
     this._router.navigate(['/list']);
   }
 

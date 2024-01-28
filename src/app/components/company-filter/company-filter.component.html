@@ -1,6 +1,6 @@
 <form [formGroup]="filterForm" class="filter">
   <div class="control">
-    <label for="nameFilter">Поиск по названию:</label>
+    <label for="nameFilter">Поиск по наимененованию:</label>
     <br />
     <input type="text" id="nameFilter" formControlName="name" />
   </div>
@@ -17,7 +17,7 @@
     <br />
     <select id="industryFilter" formControlName="industry">
       <option value="All">Все</option>
-      <option *ngFor="let industry of industries" value="{{ industry }}">
+      <option *ngFor="let industry of industries" value="{{ industry }}" [ngValue]="industry">
         {{ industry }}
       </option>
     </select>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { CompanyModel } from '../../models/company.model';
 
@@ -13,12 +13,11 @@ export class CompanyItemComponent {
 
   @Input()
   public company!: CompanyModel;
+  private _router = inject(Router);
 
-  constructor(
-    private _router: Router
-  ) { }
+  constructor() { }
 
-  onCompanyClick() {
+  public onCompanyClick(): void {
     this._router.navigate(['detail', this.company.id]);
   }
 }

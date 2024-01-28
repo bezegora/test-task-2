@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CompanyItemComponent } from '../../components/company-item/company-item.component';
 import { CommonModule } from '@angular/common';
 import { CompanyService } from '../../services/company-service.service';
 import { CompanySortComponent } from '../../components/company-sort/company-sort.component';
 import { CompanyFilterComponent } from '../../components/company-filter/company-filter.component';
+import { FilterType } from '../../types/filter.type';
 
 @Component({
   selector: 'app-company-list',
@@ -20,18 +21,16 @@ import { CompanyFilterComponent } from '../../components/company-filter/company-
 })
 export class CompanyListComponent {
 
-  onFilterChanged(filters: { name: string, type: string, industry: string }) {
+  private _compService = inject(CompanyService);
+  public companyList$ = this._compService.filteredCompanyList$;
+
+  constructor() { }
+
+  public onFilterChanged(filters: FilterType): void {
     this._compService.filterCompanies(filters);
   }
 
-  onSortChanged(sortType: string) {
+  public onSortChanged(sortType: string): void {
     this._compService.sortCompanies(sortType);
   }
-
-  public companyList$ = this._compService.filteredCompaniesSubj;
-
-  constructor(
-    private _compService: CompanyService
-  ) { }
-
 }
