@@ -17,7 +17,7 @@ export class CompanyService {
     type: 'All',
     industry: 'All'
   }
-  private _filteredCompaniesSubj = new BehaviorSubject<CompanyModel[] | null>([]);
+  private _filteredCompaniesSubj = new BehaviorSubject<CompanyModel[] | null>(null);
   public filteredCompanyList$ = this._filteredCompaniesSubj.asObservable();
 
   private _companyListSubj = new BehaviorSubject<CompanyModel[] | null>([]);
