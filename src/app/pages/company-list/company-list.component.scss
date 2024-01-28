@@ -1,3 +1,7 @@
+* {
+  font-family: Helvetica, sans-serif;
+}
+
 h1 {
   font-size: 2em;
   border-bottom: 5px solid antiquewhite;
@@ -33,7 +37,7 @@ app-company-item {
 .user-controls {
   display: flex;
   flex-direction: row;
-  gap: 15vw;
+  gap: 5vw;
   justify-content: space-around;
   max-width: 1200px;
   width: 100vw;

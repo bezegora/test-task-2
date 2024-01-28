@@ -1,10 +1,12 @@
-<div>
-  <label for="sortSelect">Сортировать по </label>
-  <br />
-  <select id="sortSelect" [(ngModel)]="selectedSort" (change)="onSortChange()">
-    <option value=""></option>
-    <option value="name">названию</option>
-    <option value="type">типу</option>
-    <option value="industry">виду деятельности</option>
-  </select>
+<div class="sort">
+  <div class="control">
+    <label for="sortSelect">Сортировать по </label>
+    <br />
+    <select id="sortSelect" [(ngModel)]="selectedSort" (change)="onSortChange()">
+      <option value=""></option>
+      <option value="name">названию</option>
+      <option value="type">типу</option>
+      <option value="industry">виду деятельности</option>
+    </select>
+  </div>
 </div>

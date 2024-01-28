@@ -1,0 +1,22 @@
+.sort {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: space-between;
+  .control {
+    display: table-cell;
+    vertical-align: middle;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    label, select, input {
+      padding: 0.3rem;
+      display: inline-block;
+      vertical-align: baseline;
+      // align-self: center;
+      margin-left: auto;
+      margin-right: auto;
+      width: 200px;
+    }
+  }
+}
