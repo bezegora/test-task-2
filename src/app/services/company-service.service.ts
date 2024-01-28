@@ -20,7 +20,7 @@ export class CompanyService {
   private _filteredCompaniesSubj = new BehaviorSubject<CompanyModel[] | null>(null);
   public filteredCompanyList$ = this._filteredCompaniesSubj.asObservable();
 
-  private _companyListSubj = new BehaviorSubject<CompanyModel[] | null>([]);
+  private _companyListSubj = new BehaviorSubject<CompanyModel[] | null>(null);
   public companyList$ = this._companyListSubj.asObservable();
 
   public get sortType(): string {
